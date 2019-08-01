@@ -1,3 +1,7 @@
+#max logn depth of the tree (easy proof) ==> no tall trees
+#union - constant time (lgN)
+#find - proportional to depth of the two element
+
 class weighted_quick_union:
     def __init__(self, array=None):
         if(array == None):
