@@ -1,4 +1,4 @@
-| Algo          | Worst case    |
+| Algorithm          | Worst case    |
 | ------------- | ------------- |
 | quick find  | M*N  |
 | quick union  | M*N  |
