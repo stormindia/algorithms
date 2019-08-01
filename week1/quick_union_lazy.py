@@ -2,7 +2,7 @@
 #element - 0 1 2 3 4 5 6
 #id -      0 1 2 3 4 5 6
 
-#trees are not flat can get too tall
+#trees are not flat but can get too tall
 #find is very expensive
 
 class quick_union:
