@@ -1,3 +1,5 @@
+#union is too expensive
+# it is too expensive to keep trees flat ==> see quick_union_lazy approach
 class quick_find:
     def __init__(self, array=None):
         if(array == None):
