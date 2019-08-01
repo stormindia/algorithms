@@ -37,7 +37,12 @@ class quick_union:
 
         id_a = self.root(a)
         id_b = self.root(b)
-        self.element_id[id_a][0] = id_b
+        if(id_a == id_b):
+            print("already connected")
+            return
+        else:
+            self.element_id[id_a][0] = id_b
+            return
         ##major bug #####
         #self.element_id[a][0] = self.root(b)
 
@@ -54,4 +59,4 @@ print(quick_union_1.isconnected(6,1))
 
 quick_union_1.union(6,0)
 #print(quick_union_1.root(1))
-print(quick_union_1.isconnected(1,0))
+quick_union_1.union(1,0)
