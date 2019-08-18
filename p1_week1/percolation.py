@@ -9,7 +9,7 @@ class percolation:
         # root value{0} , element's value(index value){1}, open or closed{2}, tree size of that element{3}
         # initially all elements values are equal to root value
         # initially all elements are closed execept v_top and v_bottom
-        # initially tree size of all elements is 1 
+        # initially tree size of all elements is 1
         self.grid = [[i,i, False, 1] for i in range(self.grid_size)]
         #print(self.grid[0][3])
         self.v_top = [-1,-1, True, 1]
@@ -203,7 +203,6 @@ class percolation:
 
 
 system_1 = percolation(3)
-
 
 system_1.open(0)
 system_1.open(3)
