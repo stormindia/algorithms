@@ -42,7 +42,8 @@ class binary_heap:
     #It can have value less than its parent. But its children can have value larger than their parent
     def sink(self,k):
 
-        while(2*k < len(self.heap)):
+        while(2*k <= len(self.heap) - 1):
+
             i = 2*k
             #print(i)
             if(i < len(self.heap)-1 and self.less(i, i + 1)):  #right child (2k + 1) is bigger
@@ -75,8 +76,9 @@ class binary_heap:
 
         #print(self.heap , len(self.heap))
 
-        del[self.heap[len(self.heap)-1]]    #prevent loitering
+        #del[self.heap[len(self.heap)-1]]    #prevent loitering
         self.sink(1)
+        del[self.heap[len(self.heap)-1]]
 
 
 arr = [100,90,80,70,60,50,40,30,20]
