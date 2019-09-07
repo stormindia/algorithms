@@ -76,9 +76,9 @@ class binary_heap:
 
         #print(self.heap , len(self.heap))
 
-        #del[self.heap[len(self.heap)-1]]    #prevent loitering
+        del[self.heap[len(self.heap)-1]]    #prevent loitering
         self.sink(1)
-        del[self.heap[len(self.heap)-1]]
+
 
 
 arr = [100,90,80,70,60,50,40,30,20]
