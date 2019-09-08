@@ -1,8 +1,8 @@
 Stack and queues - 
-http://homes.sice.indiana.edu/yye/lab/teaching/spring2014-C343/lists.php
+https://algs4.cs.princeton.edu/13stacks/
 
-Sorting algo performance comparison info - 
-http://www-cs-students.stanford.edu/~rashmi/projects/Sorting.pdf
+Elementry Sorting algo info - 
+https://algs4.cs.princeton.edu/21elementary/
 
 Programming assignment - Randomized queue and DEQUEUE
 https://coursera.cs.princeton.edu/algs4/assignments/queues/specification.php
