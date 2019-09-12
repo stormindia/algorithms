@@ -19,8 +19,7 @@ class binary_heap:
         else:
             return False
 
-    #In case, a parent is less than one (or both) of its child   ==> different from above ==> That parent can be a child of another node.
-    #It can have value less than its parent. But its children can have value larger than their parent
+
     def sink(self,k,N):
 
         while(2*k <= N ):
