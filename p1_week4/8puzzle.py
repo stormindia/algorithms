@@ -24,16 +24,17 @@ class Puzzle:
     #for simplicity using an extra array to store all the values in 1D
     #requires improvement
     def isSolvable(self):
-        self.one_d_array = []
+        one_d_array = []
 
         for i in range(0,len(self.board)):
             for j in range(0,len(self.board)):
-                self.one_d_array.append(self.board[i][j])
+                one_d_array.append(self.board[i][j])
 
+        #print(one_d_array)
         inv_count = 0
-        for i in range(0,len(self.one_d_array)-1):
-            for j in range(i+1, len(self.one_d_array)):
-                if (self.one_d_array[i] != 0 and self.one_d_array[j] != 0 and self.one_d_array[i] > self.one_d_array[j]):
+        for i in range(0,len(one_d_array)-1):
+            for j in range(i+1, len(one_d_array)):
+                if (one_d_array[i] != 0 and one_d_array[j] != 0 and one_d_array[i] > one_d_array[j]):
                     inv_count = inv_count + 1
 
         if(inv_count % 2 == 0):
@@ -261,7 +262,13 @@ class Puzzle:
 # if(b3.isSolvable()):
 #     b3.solver()
 
-board4 = [[3,1,2],[6,4,5],[7,0,8]]
-b4 = Puzzle(board4)
-if(b4.isSolvable()):
-    b4.solver()
+# board4 = [[3,1,2],[6,4,5],[7,0,8]]
+# b4 = Puzzle(board4)
+# if(b4.isSolvable()):
+#     b4.solver()
+
+
+board5 = [[1,8,2],[0,4,3],[7,6,5]]
+b5 = Puzzle(board5)
+if(b5.isSolvable()):
+    b5.solver()
