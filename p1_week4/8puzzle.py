@@ -2,6 +2,9 @@
 #https://www.geeksforgeeks.org/check-instance-8-puzzle-solvable/
 
 #used same heuristic function as given in assignment
+#only get_neighbours function requires minor modification for N-puzzle solutions
+
+import copy
 
 class Puzzle:
 
@@ -10,13 +13,13 @@ class Puzzle:
     #               1 2 3   4 5 6   7 8 0
     #    X          0 0 0   1 1 1   2 2 2
     #    Y          0 1 2   0 1 2   0 1 2
-    #to make calculation of manhattan_value easy, save the goal_state values with their coordinates as well
-    #goal_state = [[[1,0,0],[2,0,1],[3,0,2]],[[4,1,0],[5,1,1],[6,1,2]],[[7,2,0],[8,2,1],[0,2,2]]]
+
 
     def __init__(self, board=None):
         self.board = board
 
 
+    #currently has bugs -- require fixing
     #check if it is solvable
     #for simplicity using an extra array to store all the values in 1D
     #requires improvement
@@ -42,32 +45,49 @@ class Puzzle:
 
 
 
-    def manhattan_value(self):
+    def manhattan_value(self,data=None):
         manhattan_distance = 0
-        for i in range(0,len(self.board)):
-            for j in range(0,len(self.board)):
-                if(self.board[i][j] != self.goal_state[i][j]):
-
+        for i in range(0,len(data)):
+            for j in range(0,len(data)):
+                if(data[i][j] != self.goal_state[i][j] and data[i][j] != 0):
                     #correct position of the element
-                    x_goal , y_goal = divmod(self.board[i][j],3)
+                    x_goal , y_goal = divmod(data[i][j],3)
                     manhattan_distance = manhattan_distance + abs(i-x_goal) + abs(j-y_goal)
 
         return manhattan_distance
 
 
-    def hamming_value(self):
+    def hamming_value(self,data=None):
         hamming_value = 0
-        for i in range(0,len(self.board)):
-            for j in range(0,len(self.board)):
-                if(self.board[i][j] != self.goal_state[i][j]):
+        for i in range(0,len(data)):
+            for j in range(0,len(data)):
+                if(data[i][j] != self.goal_state[i][j]):
                     hamming_value = hamming_value + 1
 
         return hamming_value
 
 
+    #swaps values then save the resultant state in an array and then reswaps them to return to original position for further swapping
+    def append_in_list(self,a,b,c,d,data=None):
+
+        result_state = []
+
+        #swap the values
+        data[a][b] , data[c][d] = data[c][d] , data[a][b]
+
+        for i in range(0,len(data)):
+            result_state.append(data[i][:])
+
+        #reswap them to their original position
+        data[a][b] , data[c][d] = data[c][d] , data[a][b]
+
+        #print(result_state)
+        return result_state
+
     def get_neighbours(self,data=None):
 
-        tmp_state = data
+        #tmp_state = data
+        result = []
         get_neighbours_list = []
         border_condition = False
 
@@ -83,31 +103,65 @@ class Puzzle:
                     y_blank = j
                     break
 
+        #print(x_blank, y_blank)
+
         #topmost row
         if(x_blank == 0):
-            tmp_state[x_blank][y_blank] , tmp_state[x_blank + 1][y_blank] = tmp_state[x_blank + 1][y_blank] , tmp_state[x_blank][y_blank]
-            get_neighbours_list.append(tmp_state)
+            result = self.append_in_list(x_blank,y_blank,x_blank+1,y_blank,data)
+            get_neighbours_list.append(result)
+
+            if(y_blank != 0):
+                result = self.append_in_list(x_blank,y_blank,x_blank,y_blank-1,data)
+                get_neighbours_list.append(result)
+            if(y_blank != 2):
+                result = self.append_in_list(x_blank,y_blank,x_blank,y_blank+1,data)
+                get_neighbours_list.append(result)
             border_condition = True
 
+
         #bottom most row
-        tmp_state = data
         if(x_blank == 2):
-            tmp_state[x_blank][y_blank] , tmp_state[x_blank - 1][y_blank] = tmp_state[x_blank - 1][y_blank] , tmp_state[x_blank][y_blank]
-            get_neighbours_list.append(tmp_state)
+            result = self.append_in_list(x_blank,y_blank,x_blank-1,y_blank,data)
+            get_neighbours_list.append(result)
+
+            if(y_blank != 0):
+                result = self.append_in_list(x_blank,y_blank,x_blank,y_blank-1,data)
+                get_neighbours_list.append(result)
+
+            if(y_blank != 2):
+                result = self.append_in_list(x_blank,y_blank,x_blank,y_blank+1,data)
+                get_neighbours_list.append(result)
+
             border_condition = True
 
         #left most row
-        tmp_state = data
         if(y_blank == 0):
-            tmp_state[x_blank][y_blank] , tmp_state[x_blank][y_blank + 1] = tmp_state[x_blank][y_blank + 1] , tmp_state[x_blank][y_blank]
-            get_neighbours_list.append(tmp_state)
+
+            if(x_blank == 1):
+                result = self.append_in_list(x_blank,y_blank,x_blank-1,y_blank,data)
+                get_neighbours_list.append(result)
+
+                result = self.append_in_list(x_blank,y_blank,x_blank+1,y_blank,data)
+                get_neighbours_list.append(result)
+
+                result = self.append_in_list(x_blank,y_blank,x_blank,y_blank+1,data)
+                get_neighbours_list.append(result)
+
             border_condition = True
 
         #right most row
-        tmp_state = data
         if(y_blank == 2):
-            tmp_state[x_blank][y_blank] , tmp_state[x_blank][y_blank - 1] = tmp_state[x_blank][y_blank - 1] , tmp_state[x_blank][y_blank]
-            get_neighbours_list.append(tmp_state)
+
+            if(x_blank == 1):
+                result =  self.append_in_list(x_blank,y_blank,x_blank-1,y_blank,data)
+                get_neighbours_list.append(result)
+
+                result = self.append_in_list(x_blank,y_blank,x_blank+1,y_blank,data)
+                get_neighbours_list.append(result)
+
+                result = self.append_in_list(x_blank,y_blank,x_blank,y_blank-1,data)
+                get_neighbours_list.append(result)
+
             border_condition = True
 
         #in between element
@@ -115,35 +169,34 @@ class Puzzle:
             return get_neighbours_list
         else:
             border_condition = False
-            tmp_state = data
             # 4 possible neighbours in this case
 
             # first - upper element
-            tmp_state[x_blank][y_blank] , tmp_state[x_blank - 1][y_blank] = tmp_state[x_blank - 1][y_blank] , tmp_state[x_blank][y_blank]
-            get_neighbours_list.append(tmp_state)
+            result = self.append_in_list(x_blank,y_blank,x_blank-1,y_blank,data)
+            get_neighbours_list.append(result)
 
             #second - lower element
-            tmp_state = data      #we can simply revert the above change again by reswapping the values
-            tmp_state[x_blank][y_blank] , tmp_state[x_blank + 1][y_blank] = tmp_state[x_blank + 1][y_blank] , tmp_state[x_blank][y_blank]
-            get_neighbours_list.append(tmp_state)
+            result = self.append_in_list(x_blank,y_blank,x_blank+1,y_blank,data)
+            get_neighbours_list.append(result)
 
             #third - element to right
-            tmp_state = data      #we can simply revert the above change again by reswapping the values
-            tmp_state[x_blank][y_blank], tmp_state[x_blank][y_blank + 1] = tmp_state[x_blank][y_blank + 1], tmp_state[x_blank][y_blank]
-            get_neighbours_list.append(tmp_state)
+            result = self.append_in_list(x_blank,y_blank,x_blank,y_blank+1,data)
+            get_neighbours_list.append(result)
 
             #fourth - element to left
-            tmp_state = data      #we can simply revert the above change again by reswapping the values
-            tmp_state[x_blank][y_blank], tmp_state[x_blank][y_blank - 1] = tmp_state[x_blank][y_blank - 1], tmp_state[x_blank][y_blank]
-            get_neighbours_list.append(tmp_state)
+            result = self.append_in_list(x_blank,y_blank,x_blank,y_blank-1,data)
+            get_neighbours_list.append(result)
             return get_neighbours_list
 
 
     #implement A* algorithm
     def solver(self):
         moves = 0
-
+        heuristic_value = []
+        prev_state = []
         curr_state = self.board
+        output = []
+
 
         if(curr_state == self.goal_state):
             print("goal state reached!")
@@ -151,10 +204,43 @@ class Puzzle:
             print("number of moves required to reach goal state --> {}".format(moves))
 
         else:
-            print(self.get_neighbours(curr_state))
-            #print()
-            return
+            while(True):
+                min_heuristic_value = 99999999999
+                min_pos = None
+                moves = moves + 1
+                output = self.get_neighbours(curr_state)
+                #print(output)
+                for i in range(len(output)):
+                    if(output[i] != prev_state):
+                        h = self.manhattan_value(output[i])
+                        if(h < min_heuristic_value):
+                            min_heuristic_value = h
+                            min_pos = i
+                        elif(h == min_heuristic_value):
+                            #calculate hamming_value for i and min_pos to break tie
+                            hamming_value_i = self.hamming_value(output[i])
+                            hamming_value_min_pos = self.hamming_value(output[min_pos])
+                            if(hamming_value_i < hamming_value_min_pos):
+                                min_heuristic_value = h
+                                min_pos = i
+                            else:
+                                pass
+                        else:
+                            pass
 
+                if(min_heuristic_value == 0):
+                    print("goal state reached!")
+                    print(output[min_heuristic_value])
+                    print("minimum number of moves required to reach goal state --> {}".format(moves))
+                    break
+                else:
+                    prev_state = copy.deepcopy(curr_state)
+                    curr_state = copy.deepcopy(output[min_pos])
+                    #print(curr_state)
+                    #if(moves > 2):
+                    #    break
+
+            return
 
 
 
@@ -165,7 +251,17 @@ class Puzzle:
 #b1 = Puzzle(board1)
 #b1.isSolvable()
 
-board2 = [[1,0,2],[3,4,5],[6,7,8]]
-b2 = Puzzle(board2)
-#b2.isSolvable()
-b2.solver()
+# board2 = [[1,0,2],[3,4,5],[6,7,8]]
+# b2 = Puzzle(board2)
+# if(b2.isSolvable()):
+#     b2.solver()
+
+# board3 = [[3,1,2],[0,4,5],[6,7,8]]
+# b3 = Puzzle(board3)
+# if(b3.isSolvable()):
+#     b3.solver()
+
+board4 = [[3,1,2],[6,4,5],[7,0,8]]
+b4 = Puzzle(board4)
+if(b4.isSolvable()):
+    b4.solver()
