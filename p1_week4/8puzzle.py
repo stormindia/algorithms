@@ -4,6 +4,11 @@
 #used same heuristic function as given in assignment
 #only get_neighbours function requires minor modification for N-puzzle solutions
 
+#in this case isSolvable considers the goal state in which the relative order is maintained(sorted) with blank(0) being anywhere.
+
+#test with boards for which you are sure it will lead to the defined goal_state in the code.
+#It could be the case that a board is solvable but might not lead to the current defined goal state 
+
 import copy
 
 class Puzzle:
@@ -266,9 +271,3 @@ class Puzzle:
 # b4 = Puzzle(board4)
 # if(b4.isSolvable()):
 #     b4.solver()
-
-
-board5 = [[1,8,2],[0,4,3],[7,6,5]]
-b5 = Puzzle(board5)
-if(b5.isSolvable()):
-    b5.solver()
