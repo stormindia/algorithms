@@ -42,7 +42,6 @@ class BST:
     #finds min in a subtree
     def find_min(self,node):
 
-        curr_node = node
         while(node.left is not None):
             node = node.left
 
@@ -235,10 +234,9 @@ class BST:
                 return node.left
 
             tmp_node = node
-            node = self.min(tmp_node.right) #no particular reason for going right
+            node = self.find_min(tmp_node.right) #no particular reason for going right
             node.right = self.delMin(tmp_node.right)
             node.left = tmp_node.left
 
         node.count = 1 + self.size(node.left) + self.size(node.right)
         return node
-    
