@@ -134,17 +134,19 @@ class BST:
 
     #RANK -> number of keys < given keys
     def rank(self,key):
-        return self.__rank(self.root,rank)
+        return self.__rank(self.root,key)
 
     def __rank(self,node,key):
-        if(node == none):
+        if(node == None):
             return 0
 
         if(key < node.key):
             return self.__rank(node.left,key)
         elif(key > node.key):
-            return 1 + size(node.left) + self.__rank(node.right,key)
-
+            if(node.left is not None):
+                return 1 + self.size(node.left) + self.__rank(node.right,key)
+            else:
+                return 1 + self.__rank(node.right,key)
         else:
             return size(node.left)
 
