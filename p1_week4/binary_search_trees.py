@@ -14,7 +14,7 @@ class BST:
 
     def size(self,node):
         if(node == None):
-            return None
+            return 0
         return node.count
 
     def complete_size(self):
@@ -148,7 +148,7 @@ class BST:
             else:
                 return 1 + self.__rank(node.right,key)
         else:
-            return size(node.left)
+            return self.size(node.left)
 
 #Depth first search - {IN, PRE, POST}ORDER
     #INORDER TRAVERSAL
