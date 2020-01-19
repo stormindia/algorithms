@@ -18,7 +18,7 @@ def selection_sort(data=None):
 
 		i = i +1
 
-	return data	
+	return data
 
 
 
@@ -30,12 +30,12 @@ def insertion_sort(data=None):
 			pass
 		else:
 			j = i+1
-			while(j > 0):
-				if(data[j] < data[j-1]):
-					swap_values(j,j-1,data)
+			while(j > 0 and data[j] < data[j-1] ):
+#				if(data[j] < data[j-1]):
+				swap_values(j,j-1,data)
 				j = j -1
 
-	return data			
+	return data
 
 
 def shell_sort(data=None):
@@ -47,29 +47,27 @@ def shell_sort(data=None):
 	h = 1
 	while(h < int(N/3)):
 		h = 3*h + 1
-		#print(h)    
+		#print(h)
 	while(h >= 1):
 		for i in range(h,N):
 
 			tmp = data[i]
 			j = i
-			while j >= h and data[j -h] > tmp : 
+			while j >= h and data[j -h] > tmp :
 				data[j] = data[j-h]
 				j = j - h
 
 			data[j] = tmp
 
-		h = h//3			
+		h = h//3
 
-	return data        
-
-
+	return data
 
 
-#array_1 = [5,3,1,7,9,2,100,50,62,70]
+
+
+array_1 = [5,3,1,7,9,2,100,50,62,70,89,98,11]
 
 #print(selection_sort(array_1))
-#print(insertion_sort(array_1))
+print(insertion_sort(array_1))
 #print(shell_sort(array_1))
-
-
