@@ -11,6 +11,7 @@
 
 
 # below is a pseudo code - a full fleged implementation in python is getting too complicated to write
+# not sure if below implementation of put function works! Updating max_endpoint is getting complicated in recursion
 # grateful to anyone who wishes to contribute to a python code based on the algorithm as suggested here - https://www.coursera.org/learn/algorithms-part1/lecture/ot9vw/interval-search-trees
 
 class intervalST:
@@ -29,8 +30,36 @@ class intervalST:
             self.max_endpoint = high
 
 
-    def put(self, lo, hi, val):
-        return
+    def put(self,low,high):
+        self.root = self.__put(self.root,low,high)
+
+    def __put(self,node,key,value): #for recursion
+
+        if(node == None):
+            #create a new Node
+            new_node = BST.Node(low,high)
+            if(high_tmp > new_node.high):
+                new_node.max_endpoint = high_tmp
+            return new_node
+
+        if(low < node.low):
+            node.left = self.__put(node.left,low,high)
+            if(node.left.max_endpoint < high):
+                node.left.max_endpoint = high
+            else:
+                high_tmp = node.left.max_endpoint
+
+        elif(low > node.low):
+            node.right = self.__put(node.right,low,high)
+            if(node.right.max_endpoint < high):
+                node.right.max_endpoint = high
+            else:
+                high_tmp = node.right.max_endpoint
+        else:
+            node.value = value
+
+
+        return node
 
     def get(self, lo, hi):
         return
@@ -39,6 +68,8 @@ class intervalST:
         return
 
     def intersects(self, lo, hi):
+
+        #easy to Write
         return
 
 
