@@ -1,8 +1,8 @@
 #BFS computes shortest path from source_vertex to all other vertices in time proportional to E + V
 
-#BFS is implemented using queue
+#BFS is implemented using queue (non recursive)
 
-#DFS is implemented using stacks
+#DFS is implemented using stacks (recursive)
 
 # we can simply use python array features to implement queue and use queue.pop and queue.append features (https://www.geeksforgeeks.org/queue-in-python/)
 
