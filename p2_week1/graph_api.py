@@ -4,7 +4,7 @@
 #We can take an array where each element of an array is an array itself
 #We can also make each element of the array a queue but insertion in array(apend) and queue(ennqueue) is same
 
-# V represents vertex - starts from 0 to # NOTE: vertices are continuous
+# V represents total number of vertices - starts from 0 to # NOTE: vertices are continuous
 
 class Graph:
 
