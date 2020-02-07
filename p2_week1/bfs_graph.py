@@ -25,7 +25,7 @@ def BreadthFirstPath:
         self.edgeTo = []*self.G.V
         self.distTo = []*self.G.V
 
-    def dfs(self,graph,source_vertex):
+    def bfs(self,graph,source_vertex):
 
         queue = []
 
@@ -41,6 +41,7 @@ def BreadthFirstPath:
                 if(self.marked[i] is not True):
                     queue.append(i)
                     self.marked[i] = True
+                    self.edgeTo[i] = vertex
 
                 # fill the distTo array
                 if(self.edgeTo[i] is source_vertex):
