@@ -15,7 +15,7 @@
 
 from graph_api import Graph
 
-def BreadthFirstPath:
+class BreadthFirstPath:
 
     def __init__(self, graph, source_vertex):
 
