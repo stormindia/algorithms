@@ -31,6 +31,10 @@ class TopologicalSort:
 
     def return_sorted_graph(self):
 
+        reverse_post_order =  []
         # print the array in reverse order
         for i in range(len(self.reversePost),0, -1):
+            reverse_post_order.append(self.reversePost[i])
             print(self.reversePost[i])
+
+            return reverse_post_order
