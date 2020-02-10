@@ -9,6 +9,7 @@ class Digraph:
     def __init__(self, V):
         self.V = V
         self.adj = []*V
+        self.marked = []*V
 
         for i in range(V):
             self.adj[i] = []
@@ -56,3 +57,23 @@ class Digraph:
                     count = count + 1
 
         return count/2
+
+# finding root of a dag ==> to be used in wordnet assignment
+# run dfs on the graph and stop where indegree is 0 ==> linear time algo
+    def root_of_dag(self):
+
+        for i in range(self.V):
+            if(self.marked[i] is not True):
+                self.dfs_for_root_of_dag(graph,i)
+
+    def dfs_for_root_of_dag(self,graph,vertex):
+
+        if(self.in_degree(vertex) == 0):
+            print("root node is" , vertex)
+            return vertex
+
+        self.marked[vertex] = True
+
+        for i in self.adj[vertex]:
+            if(self.marked[i] is not True):
+                self.dfs_for_root_of_dag(graph,i)
