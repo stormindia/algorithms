@@ -29,7 +29,7 @@ emp_1 = Employee('asd','qwe',100)
 emp_2 = Employee('xyz','aaa',50)
 
 print(emp_1.first)
-print(emp_1.email)  #email is a class now but we can still use it as an attribute
+print(emp_1.email)  #email is a method now but we can still use it as an attribute
 
 emp_1.fullname = 'asdasd asdds'
 print(emp_1.fullname)
