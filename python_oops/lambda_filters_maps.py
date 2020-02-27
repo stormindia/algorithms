@@ -55,7 +55,7 @@ print(list(new_arr1))
 
 #map(fun, iter)
 
-#Returns a list of the results after applying the given function
+#Returns a list(in python 2 it returns a map object which is iterable) of the results after applying the given function
 #to each item of a given iterable (list, tuple etc.)
 
 
