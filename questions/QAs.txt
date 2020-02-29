@@ -14,7 +14,7 @@ appropriate bytes in that case -- memory allocation )
 
 5. linkedlist implement ==> p1/week2/linkedlist.py
 
-6. queue implement using stack
+6. queue implement using stack  queue_using_stack.py
 
 7. nibbles (reverse upper nibble with lower nibble)
 
