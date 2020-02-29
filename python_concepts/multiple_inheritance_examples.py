@@ -34,7 +34,10 @@ class D(A,B,C):
         #self.a_method()
         #B.a_method(self)
         D.__mro__[2].a_method(self)
+
         #D.__mro__[3].a_method(self)  #will throw error as a_method of C class is private(look below on how to access private method)
+        #C.__a_method() #will throw error as a_method of C class is private(look below on how to access private method)
+
         #self.B.a_method()
         #super(B,self).a_method()
 
