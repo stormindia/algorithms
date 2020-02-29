@@ -1,0 +1,20 @@
+1. creating a empty dict/tuple inside dicct/tuple and inserting it into empty dict/tuple - is this allowed ?
+
+2. reverse a line with special character unmoved -
+hello, my name is abc. I am good, but this is better.
+>>better, is this but good. am I abc, is name my hello.
+
+3. reverse a string and move only characters(in similar fashion as above)
+
+4. how do list/tuples store elements inside them? (memory allocation. How does list know to while accessing 100th index that 99th index is of which type so that it can move
+appropriate bytes in that case -- memory allocation )
+
+5. linkedlist implement
+
+6. queue implement using stack
+
+7. nibbles (reverse upper nibble with lower nibble)
+
+8. bitmasking and bitwise operators code
+
+9. making a method private in a class in python
