@@ -1,3 +1,5 @@
+#important properties
+
 # Lists -
 # 1. Ordered
 # 2. Hetrogeneous
