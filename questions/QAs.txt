@@ -1,15 +1,18 @@
-1. creating a empty dict/tuple inside dicct/tuple and inserting it into empty dict/tuple - is this allowed ?
+1. creating a empty dict/tuple inside dict/tuple and inserting it into empty dict/tuple - is this allowed ?
+list_tuples_dicts.py
 
-2. reverse a line with special character unmoved -
+2. reverse a line with special character unmoved ==>  line_string_reversal.py
 hello, my name is abc. I am good, but this is better.
 >>better, is this but good. am I abc, is name my hello.
 
-3. reverse a string and move only characters(in similar fashion as above)
+3. reverse a string and move only characters(in similar fashion as above) ==>line_string_reversal.py
+
 
 4. how do list/tuples store elements inside them? (memory allocation. How does list know to while accessing 100th index that 99th index is of which type so that it can move
 appropriate bytes in that case -- memory allocation )
 
-5. linkedlist implement
+
+5. linkedlist implement ==> p1/week2/linkedlist.py
 
 6. queue implement using stack
 
@@ -17,4 +20,6 @@ appropriate bytes in that case -- memory allocation )
 
 8. bitmasking and bitwise operators code
 
-9. making a method private in a class in python
+9. making a method private in a class in python ==> python_concepts/multiple_inheritance_example.py
+
+10. pyc files and pycache
