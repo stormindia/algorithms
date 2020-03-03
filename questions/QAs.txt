@@ -19,6 +19,7 @@ appropriate bytes in that case -- memory allocation )
   7.a. nibbles (reverse upper nibble with lower nibble) (binary_operations.py)
 
 8. making a method private in a class in python ==> python_concepts/multiple_inheritance_example.py
+https://medium.com/@manjuladube/encapsulation-abstraction-35999b0a3911
 
 9. pyc files and pycache
 https://stackoverflow.com/questions/2998215/if-python-is-interpreted-what-are-pyc-files
