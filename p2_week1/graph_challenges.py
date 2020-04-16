@@ -17,17 +17,17 @@ class Check_Cycle:
 
         for i in range(self.G.V):
             if (self.marked[i] is not True):
-                self.dfs_for_cycle(self.G, i)
+                self.dfs_for_cycle(self.G, i,i)
 
-    def dfs_for_cycle(self,graph,vertex):
+    def dfs_for_cycle(self,graph,vertex,source_vertex):
 
         self.marked[vertex] = True
 
         for i in self.Graph.adj[vertex]:
             if (self.marked[i] is not True):
-                self.dfs_for_cycle(self.G,i)
+                self.dfs_for_cycle(self.G,i,source_vertex)
             else:
-                if(i != vertex):
+                if(i != source_vertex):
                     self.hasCycle = True
                 else:
                     pass
