@@ -41,3 +41,9 @@ class connected_components:
 
     def connected_components_number(self):
         return self.count
+
+    def is_connected(self,v1,v2):
+        if(self.cc[v1] == self.cc[v2]):
+            return True
+
+        return False
