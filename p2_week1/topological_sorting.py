@@ -3,6 +3,8 @@
 # Run DFS
 # Return vertices in reverse post-order
 
+#added finding directed cycle
+
 # to print vertices in reverse post order - use stack - Using just an array and prinitng it in reverse for simiplicity
 
 from digraph_api import Digraph
@@ -13,6 +15,8 @@ class TopologicalSort:
         self.G = graph
         self.marked = []*self.G.V
         self.reversePost = []*self.G.V
+        self.dfs_done = [0]*self.G.V
+        self.edgeTo = []*self.G.V
 
         for i in self.G.V:
             if(self.marked[i] is not True):
@@ -38,3 +42,22 @@ class TopologicalSort:
             print(self.reversePost[i])
 
             return reverse_post_order
+
+    def dfs_for_directed_cycle(self,graph,vertex):
+        self.marked[vertex] = True
+
+        for i in self.adj[vertex]:
+            if(self.marked[i] is not True):
+                self.dfs_for_directed_cycle(self.G,i)
+                self.edgeTo[i] = vertex
+            else:
+                if(self.dfs_done[i] == True):
+                    #cycle exsist
+                    cycle_arr = []
+                    for(j in self.edgeTo[i]):
+                        if(j != i):
+                            cycle_arr.append(j)
+                    cycle_arr.append(i)
+                    cycle_arr.append(vertex)
+            
+            self.dfs_done[i] = True
