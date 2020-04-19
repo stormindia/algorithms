@@ -1,5 +1,4 @@
 # two vertices are strongly connected if there is a directed path from v to w and from w to v
-# for proof - read https://github.com/stormindia/algorithms/blob/master/Robert%20Sedgewick_%20Kevin%20Daniel%20Wayne-Algorithms-Addison-Wesley%20%20(2011).pdf page 588
 
 # Algorithm -
 # Given a digraph G, use DepthFirstOrder to compute the reverse postorder of
@@ -8,7 +7,15 @@
 # computed instead of the standard numerical order.
 #  All vertices reached on a call to the recursive dfs() from the constructor are in a
 # strong component (!), so identify them as in CC.
+# for proof - read https://github.com/stormindia/algorithms/blob/master/Robert%20Sedgewick_%20Kevin%20Daniel%20Wayne-Algorithms-Addison-Wesley%20%20(2011).pdf page 588
 
+
+# Two phase algo ->(https://www.youtube.com/watch?v=RpgcYiky7uw)
+# phase 1
+# Compute the reverse of the graph
+# run DFS on it and store vertices of this DFS as they return on a stack
+# phase 2
+# run DFS on the original graph taking vertices from the above created stack
 
 # for getting a reverse graph - refer https://www.geeksforgeeks.org/transpose-graph/
 
@@ -23,18 +30,29 @@ class  KosarajuSCC:
     def __init__(self,graph):
         self.G = graph
         self.marked = []*self.G.V
+        self.marked_reverse = []*self.G.V
+        self.reverse_dfs_vertices = []*self.G.V
         self.count = 0 # number of connected componenets
-        self.id = []*self.G.V
+        self.scc = []*self.G.V
 
-        #step 1 of algo
-        dfo = TopologicalSort(G.compute_reverse_graph())
+        #Phase 1 of algo
+        reversed_graph = G.compute_reverse_graph()
 
-        #step 2 of algo
-        for i in dfo:
+        for i in reversed_graph.V:
             if not self.marked[i]:
-                self.dfs(G, i)
-                self.count += 1
+                self.dfs_for_reverse_graph(reversed_graph, i)
+            self.reverse_dfs_vertices.append(i)
 
+        #Phase 2 of algo
+        for i in range(self.G.V):
+            if self.marked[i] is not True:
+                self.dfs_for_kosaraju(self.G, i)
+            self.count += 1
+
+    def dfs_for_reverse_graph(self,graph,vertex):
+        self.marked_reverse[vertex] = True
+        for i in self.reversed_graph.adj[vertex]:
+            dfs_for_reverse_graph(self,graph,vertex)
 
     def compute_reverse_graph(self):
         #create a object graph with V vertices
@@ -46,16 +64,15 @@ class  KosarajuSCC:
 
         return reverse_graph
 
-
     def dfs_for_kosaraju(self,graph,vertex):
         self.marked[vertex] = True
-        self.id[vertex] = self.count
+        self.scc[vertex] = self.count
         for w in G.adjacent(vertex):
             if not self.marked[w]:
                 self.dfs(G, w)
 
     def is_stronglyConnected(self,v,w):
-        if(self.id[v] == self.id[w]):
+        if(self.scc[v] == self.scc[w]):
             return True
         else:
             return False
