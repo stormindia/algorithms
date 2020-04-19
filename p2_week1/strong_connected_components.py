@@ -44,7 +44,8 @@ class  KosarajuSCC:
             self.reverse_dfs_vertices.append(i)
 
         #Phase 2 of algo
-        for i in range(self.G.V):
+        while(self.reverse_dfs_vertices != []):
+            i = self.reverse_dfs_vertices.pop()
             if self.marked[i] is not True:
                 self.dfs_for_kosaraju(self.G, i)
             self.count += 1
