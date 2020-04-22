@@ -56,9 +56,11 @@ class EdgeWeightedGraph:
     def edges(self):
         return self.edges
 
-    #detect cycle using Union Find algorithm
+    #detect cycle using Union Find algorithm (updated for path compression using rank)
     def isCycle(self):
         self.makeSet = [-1]*self.V
+        self.rank = [0]*self.V
+
         for i in self.V:
             self.makeSet[i] = i
 
@@ -84,6 +86,9 @@ class EdgeWeightedGraph:
             if(a == b):
                 return True
             else:
-                union(a,b)
+                if(self.rank[a] > self.rank[b]):
+                    union(b,a)
+                else:
+                    union(a,b)
 
         return False
