@@ -41,7 +41,7 @@ class TopologicalSort:
             reverse_post_order.append(self.reversePost[i])
             print(self.reversePost[i])
 
-            return reverse_post_order
+        return reverse_post_order
 
     def dfs_for_directed_cycle(self,graph,vertex):
         self.marked[vertex] = True
@@ -59,5 +59,5 @@ class TopologicalSort:
                             cycle_arr.append(j)
                     cycle_arr.append(i)
                     cycle_arr.append(vertex)
-            
+
             self.dfs_done[i] = True
