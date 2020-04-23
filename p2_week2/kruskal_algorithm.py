@@ -32,11 +32,14 @@ class KruskalMst:
             self.makeSet[i] = i
 
         for i in sorted_edges:
-            v1 = i.either()
-            v2 = i.other(v1)
+            if(len(self.mst) < self.V-1):
+                v1 = i.either()
+                v2 = i.other(v1)
 
-            if(EdgeWeightedGraph.findSet(v1) != EdgeWeightedGraph.findSet(v1)):
-                EdgeWeightedGraph.union(v1,v2)
-                self.mst.append(i)
+                if(EdgeWeightedGraph.findSet(v1) != EdgeWeightedGraph.findSet(v1)):
+                    EdgeWeightedGraph.union(v1,v2)
+                    self.mst.append(i)
+            else:
+                return self.mst
 
         return self.mst
