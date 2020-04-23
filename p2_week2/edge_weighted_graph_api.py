@@ -61,6 +61,7 @@ class EdgeWeightedGraph:
         self.makeSet = [-1]*self.V
         self.rank = [0]*self.V
 
+
         for i in self.V:
             self.makeSet[i] = i
 
@@ -73,7 +74,13 @@ class EdgeWeightedGraph:
         def union(v1,v2):
             a = findSet(v1)
             b = findSet(v2)
-            self.makeSet[a] = b
+            if(self.rank[a] > self.rank[b]):
+                self.makeSet[b] = a
+                self.rank[a] += self.rank[b]
+            else:
+                self.makeSet[a] = b
+                self.rank[b] += self.rank[a]
+            
 
 
         for i in self.edges:
@@ -86,9 +93,6 @@ class EdgeWeightedGraph:
             if(a == b):
                 return True
             else:
-                if(self.rank[a] > self.rank[b]):
-                    union(b,a)
-                else:
-                    union(a,b)
+                union(a,b)
 
         return False
