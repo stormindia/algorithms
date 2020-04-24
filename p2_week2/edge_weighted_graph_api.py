@@ -33,6 +33,7 @@ class EdgeWeightedGraph:
         self.V = V
         self.adj = []*V    #contains edges instead of vertices
         self.edges = []
+        self.edges_from_that_vertex = []*V
 
         for i in range(V):
             self.adj[i] = []
@@ -48,9 +49,15 @@ class EdgeWeightedGraph:
         self.adj[w].append(e)
         self.edges.append([v,w,e.weight])
 
+        self.edges_from_that_vertex[v].append(w,e.weight)
+        self.edges_from_that_vertex[w].append(v,e.weight)
+
     #returns the adjacent_vertices
     def adjacent_vertices(self,v):
         return self.adj[v]
+
+    def edges_from_a_vertex(self,v):
+        return edges_from_that_vertex[v]
 
     #returns all the edges
     def edges(self):
@@ -80,7 +87,7 @@ class EdgeWeightedGraph:
             else:
                 self.makeSet[a] = b
                 self.rank[b] += self.rank[a]
-            
+
 
 
         for i in self.edges:
