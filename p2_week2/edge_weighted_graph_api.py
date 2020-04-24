@@ -49,6 +49,7 @@ class EdgeWeightedGraph:
         self.adj[w].append(e)
         self.edges.append([v,w,e.weight])
 
+        #will be required in Prim's algorithm
         self.edges_from_that_vertex[v].append(w,e.weight)
         self.edges_from_that_vertex[w].append(v,e.weight)
 
