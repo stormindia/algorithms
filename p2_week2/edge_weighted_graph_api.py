@@ -46,6 +46,7 @@ class EdgeWeightedGraph:
         w = e.other(v)
         self.adj[v].append(e)
         self.adj[w].append(e)
+        self.edges.append(e)
 
     #returns the adjacent edges
     def adjacent_edges(self,v):
