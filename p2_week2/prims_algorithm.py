@@ -34,8 +34,9 @@ class LazyPrimsMST:
         self.marked[v] = True
 
         #refer edge_weighted_graph_api
-        for e in EdgeWeightedGraph.edges_from_that_vertex(v):
-            k = e[0]    #gives the other vertex of the edge
+        for e in EdgeWeightedGraph.adjacent_edges(v):
+            i = e.either()
+            k = e.other(i)    #gives the other vertex of the edge
             if(self.marked[k] is False):
                 self.PQ.insert(e)
 
