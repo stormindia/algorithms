@@ -33,7 +33,6 @@ class EdgeWeightedGraph:
         self.V = V
         self.adj = []*V    #contains edges instead of vertices
         self.edges = []
-        self.edges_from_that_vertex = []*V
 
         for i in range(V):
             self.adj[i] = []
