@@ -72,8 +72,17 @@ class SPT_apis:
         v1 = e.edge_from()
         v2 = e.edge_to()
 
-        if(self.distTo[w] > self.distTo[v] + e.weight()):
-            self.distTo[w] = self.distTo[v] + e.weight()
-            self.edgeTo[w] = e
+        if(self.distTo[v2] is NULL):
+            if(self.distTo[v1] is self.s):
+                self.distTo[v2] = e.weight()
+            else:
+                self.distTo[v2] = self.distTo[v1] + e.weight()
+    
+        else:
+            if(self.distTo[v2] > self.distTo[v1] + e.weight()):
+                self.distTo[v2] = self.distTo[v1] + e.weight()
+                self.edgeTo[w] = e
+            else:
+                pass
 
         return
