@@ -73,7 +73,7 @@ class SPT_apis:
         v2 = e.edge_to()
 
         if(self.distTo[v2] is NULL):
-            if(self.distTo[v1] is self.s):
+            if(v1 is self.s):
                 self.distTo[v2] = e.weight()
             else:
                 self.distTo[v2] = self.distTo[v1] + e.weight()
