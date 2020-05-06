@@ -75,9 +75,10 @@ class SPT_apis:
         if(self.distTo[v2] is NULL):
             if(v1 is self.s):
                 self.distTo[v2] = e.weight()
+                self.edgeTo[v2] = e
             else:
                 self.distTo[v2] = self.distTo[v1] + e.weight()
-
+                self.edgeTo[v2] = e
         else:
             if(self.distTo[v2] > self.distTo[v1] + e.weight()):
                 self.distTo[v2] = self.distTo[v1] + e.weight()
