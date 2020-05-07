@@ -31,29 +31,19 @@ class Dijkstra_SP:
                 self.relax(e)
 
 
-
     def relax(self,e):
         v1 = e.edge_from()
         v2 = e.edge_to()
 
-        if(self.distTo[v2] is NULL):
-            if(v1 is self.s):
-                self.distTo[v2] = e.weight()
-                self.edgeTo[v2] = e
-                self.insert_in_pq_after_relax(self.indexed_PQ,v2)
-            else:
-                self.distTo[v2] = self.distTo[v1] + e.weight()
-                self.edgeTo[v2] = e
-                self.insert_in_pq_after_relax(self.indexed_PQ,v2)
+        if(self.distTo[v2] > self.distTo[v1] + e.weight()):
+            self.distTo[v2] = self.distTo[v1] + e.weight()
+            self.edgeTo[v2] = e
+            self.insert_in_pq_after_relax(self.indexed_PQ,v2)
         else:
-            if(self.distTo[v2] > self.distTo[v1] + e.weight()):
-                self.distTo[v2] = self.distTo[v1] + e.weight()
-                self.edgeTo[v2] = e
-                self.insert_in_pq_after_relax(self.indexed_PQ,v2)
-            else:
-                pass
+            pass
 
         return
+
 
     def insert_in_pq_after_relax(self, indexed_pq, v):
             if(self.indexed_PQ.contains(v)):
