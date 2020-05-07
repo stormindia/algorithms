@@ -51,7 +51,7 @@ class SPT_apis:
     def __init__(self, G, source_vertex):
         self.V = G.V
         self.s = source_vertex
-        self.distTo = []*self.V
+        self.distTo = [MAX]*self.V
         self.edgeTo = []*self.V #REFER README
 
 
@@ -72,18 +72,10 @@ class SPT_apis:
         v1 = e.edge_from()
         v2 = e.edge_to()
 
-        if(self.distTo[v2] is NULL):
-            if(v1 is self.s):
-                self.distTo[v2] = e.weight()
-                self.edgeTo[v2] = e
-            else:
-                self.distTo[v2] = self.distTo[v1] + e.weight()
-                self.edgeTo[v2] = e
+        if(self.distTo[v2] > self.distTo[v1] + e.weight()):
+            self.distTo[v2] = self.distTo[v1] + e.weight()
+            self.edgeTo[v2] = e
         else:
-            if(self.distTo[v2] > self.distTo[v1] + e.weight()):
-                self.distTo[v2] = self.distTo[v1] + e.weight()
-                self.edgeTo[v2] = e
-            else:
-                pass
+            pass
 
         return
