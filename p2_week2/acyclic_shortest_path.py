@@ -16,7 +16,7 @@ class Acyclic_SP:
         self.edgeTo = []*self.G.V
 
         topological_graph = TopologicalSort(self.G)
-        topological_ordered_verteices = topological_graph.reverse_post_order()
+        topological_ordered_verteices = topological_graph.return_sorted_graph()
 
         for vertex in topological_ordered_verteices:
             for edge in self.G.adjacent_edges[vertex]:
@@ -27,18 +27,10 @@ class Acyclic_SP:
         v1 = e.edge_from()
         v2 = e.edge_to()
 
-        if(self.distTo[v2] is NULL):
-            if(v1 is self.s):
-                self.distTo[v2] = e.weight()
-                self.edgeTo[v2] = e
-            else:
-                self.distTo[v2] = self.distTo[v1] + e.weight()
-                self.edgeTo[v2] = e
+        if(self.distTo[v2] > self.distTo[v1] + e.weight()):
+            self.distTo[v2] = self.distTo[v1] + e.weight()
+            self.edgeTo[v2] = e
         else:
-            if(self.distTo[v2] > self.distTo[v1] + e.weight()):
-                self.distTo[v2] = self.distTo[v1] + e.weight()
-                self.edgeTo[v2] = e
-            else:
-                pass
+            pass
 
         return
