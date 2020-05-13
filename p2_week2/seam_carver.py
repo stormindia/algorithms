@@ -118,7 +118,7 @@ class Acyclic_SP_for_SEAM:
         return
 
     def return_min_seam(self):
-        return [seam_value, vertex, path_arr]
+        return [seam_value+2000, vertex, path_arr]
 
 
 class Seam_Carver:
@@ -221,8 +221,8 @@ class Seam_Carver:
 
             return G_horizontal
 
-    def findHorizontalSeam(self):
 
+    def findHorizontalSeam(self):
         self.G_horizontal = self.create_horizontal_graph(self.G_horizontal)
         min_seam = []
         for i in range(self.h -1):
@@ -238,8 +238,8 @@ class Seam_Carver:
 
         return min_seam
 
-    def findVerticalSeam(self):
 
+    def findVerticalSeam(self):
         self.G_vertical = self.create_vertical_graph(self.G_vertical)
         min_seam = []
         for j in range(self.w -1):
@@ -254,3 +254,51 @@ class Seam_Carver:
                     pass
 
         return min_seam
+
+# A vertex is of form [j,i,arr_pixel[k]]
+    #min_seam is  path_arr returned ny return_min_seam function
+    def removeHorizontalSeam(self,min_seam):
+        for i in range(self.w - 1):
+            vertex = min_seam[i]
+            for j in range((vertex[0]-1), 0, -1):
+                self.vertices[i][j+1] = self.vertices[i][j]
+                weight1 = self.calculate_energy(i,j)
+                #recreate graph using create_horizontal_graph function
+                if(self.isValidIndex(i+1,j)):
+                    weight2 = self.calculate_energy(i+1,j)
+                    edge = Seam_CarverEdge(self.vertices[i][j+1],weight1,self.vertices[i+1][j],weight2)
+                    self.G_horizontal.add_edge(edge)
+                if(self.isValidIndex(i+1,j+1)):
+                    weight2 = self.calculate_energy(i+1,j+1)
+                    edge = Seam_CarverEdge(self.vertices[i][j+1],weight1,self.vertices[i+1][j+1],weight2)
+                    self.G_horizontal.add_edge(edge)
+                if(self.isValidIndex(i+1,j+2)):
+                    weight2 = self.calculate_energy(i+1,j+2)
+                    edge = Seam_CarverEdge(self.vertices[i][j+1],weight1,self.vertices[i+1][j+2],weight2)
+                    self.G_horizontal.add_edge(edge)
+            self.vertices[i][j] = NULL
+
+        return self.G_horizontal
+
+    #min_seam is  path_arr returned ny return_min_seam function
+    def removeVerticalSeam(self,min_seam):
+        for j in range(self.h-1):
+            vertex = min_seam[i]
+            for i in range((vertex[0]-1),0,-1):
+                self.vertices[i+1][j] = self.vertices[i][j]
+                weight1 = self.calculate_energy(self.vertices[i][j])
+                if(self.isValidIndex(i,j+1)):
+                    weight2 = self.calculate_energy(i,j+1)
+                    edge = Seam_CarverEdge(self.vertices[i+1][j],weight1,self.vertices[i][j+1],weight2)
+                    self.G_vertical.add_edge(edge)
+                if(self.isValidIndex(i+1,j+1)):
+                    weight2 = self.calculate_energy(i+1,j+1)
+                    edge = Seam_CarverEdge(self.vertices[i+1][j],weight1,self.vertices[i+1][j+1],weight2)
+                    self.G_vertical.add_edge(edge)
+                if(self.isValidIndex(i+1,j+1)):
+                    weight2 = self.calculate_energy(i+2,j+1)
+                    edge = Seam_CarverEdge(self.vertices[i+1][j],weight1,self.vertices[i+2][j+1],weight2)
+                    self.G_vertical.add_edge(edge)
+            self.vertices[i][j] = NULL
+
+            return self.G_vertical
