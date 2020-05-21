@@ -68,7 +68,7 @@ class MinPQ:
             print("no element present in heap")
             return False
 
-        print("deleted max element is {}".format(self.heap[1]))
+        print("deleted min element is {}".format(self.heap[1]))
 
         tmp = self.heap[1]
         self.heap[1] = self.heap[len(self.heap)-1]
@@ -84,17 +84,17 @@ class MinPQ:
 #arr = [100,90,80,70,60,50,40,30,20]
 arr = [30,20,40,50,60,70,80,90,100]
 arr1 = MinPQ(arr)
-arr1.delMax()
-arr1.delMax()
-arr1.delMax()
-arr1.delMax()
+arr1.delMin()
+arr1.delMin()
+arr1.delMin()
+arr1.delMin()
 arr1.print_heap()
-arr1.delMax()
+arr1.delMin()
 arr1.print_heap()
-arr1.delMax()
-arr1.delMax()
-arr1.delMax()
-arr1.delMax()
-arr1.delMax()
+arr1.delMin()
+arr1.delMin()
+arr1.delMin()
+arr1.delMin()
+arr1.delMin()
 arr1.insert(10)
 arr1.print_heap()
