@@ -9,6 +9,7 @@
 
 from directed_edge_weighted_graph_api import *
 from edge_weighted_graph_api import EdgeWeightedGraph
+from indexed_PQ import IndexPQ
 
 MAX = 99999
 
@@ -25,7 +26,7 @@ class BellmanFord:
         self.edgeTo = []*self.G.V
 
         self.onQ = [False]*self.G.V      #is the vertex on queue
-        self.queue = []*self.G.V    #vertices being relaxed
+        self.queue = IndexPQ(self.G.V)   #vertices being relaxed
 
         self.distTo[self.S] = 0
 
@@ -38,28 +39,29 @@ class BellmanFord:
             self.relax(v)
 
 
-    def relax(self,e):
-        v1 = e.edge_from()
-        v2 = e.edge_to()
+    def relax(self,v):
+        for e in self.adjacent_edges(v):
+            v1 = e.edge_from()
+            v2 = e.edge_to()
 
-        if(self.distTo[v2] > self.distTo[v1] + e.weight()):
-            self.distTo[v2] = self.distTo[v1] + e.weight()
-            self.edgeTo[v2] = e
-            if(self.onQ[v2] is False):
-                self.insert_in_pq_after_relax(self.queue,v2)
-                self.onQ[v2] = True
-        else:
-            #if()
-            pass
+            if(self.distTo[v2] > self.distTo[v1] + e.weight()):
+                self.distTo[v2] = self.distTo[v1] + e.weight()
+                self.edgeTo[v2] = e
+                if(self.onQ[v2] is False):
+                    self.insert_in_pq_after_relax(self.queue,v2)
+                    self.onQ[v2] = True
+            else:
+                #if()
+                pass
 
         return
 
 
     def insert_in_pq_after_relax(self, queue, v):
-            if(self.indexed_PQ.contains(v)):
-                self.indexed_PQ.decreaseKey(v,self.distTo[v])
+            if(self.queue.contains(v)):
+                self.queue.decreaseKey(v,self.distTo[v])
             else:
-                self.indexed_PQ.insert(v,self.distTo[v])
+                self.queue.insert(v,self.distTo[v])
 
 
     def hasNegativeWeightCycle(self):
