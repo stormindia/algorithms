@@ -1,3 +1,5 @@
+# For reference -> https://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
+
 class FlowEdge:
 
     def __init__(self,*args):
