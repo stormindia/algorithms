@@ -84,8 +84,8 @@ class FlowEdge:
             raise ValueError("flow is greater than capacity")
 
     def toString(self):
-        print("edge from {} -> {} has flow/capacity as {} / {}".format(self.v1, self.v2, self.flow, self.capacity))
-
+        #print("edge from {} -> {} has flow/capacity as {} / {}".format(self.v1, self.v2, self.flow, self.capacity))
+        return "{} -> {} {} / {} ".format(self.v1,self.v2,self.flow,self.capacity)
 
 
 # To test
