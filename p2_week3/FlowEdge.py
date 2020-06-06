@@ -1,7 +1,7 @@
 # For reference -> https://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
 
 class FlowEdge:
-
+    FLOATING_POINT_EPSILON = 1e-10
     def __init__(self,*args):
         # Allow user to initalize edge in 2 ways
         # with v1, v2, capacity
@@ -45,6 +45,9 @@ class FlowEdge:
     def capacity(self):
         return self.capacity
 
+    def flow_of_edge(self):
+        return self.flow
+
 
     def other(self,vertex):
         if(vertex == self.v1):
@@ -77,6 +80,12 @@ class FlowEdge:
             self.flow = self.flow + delta
         else:
             raise ValueError("invalid endpoint")
+
+        #round flow to 0 or capacity if within floating-point precision
+        if(abs(self.flow) < FLOATING_POINT_EPSILON):
+            self.flow = 0
+        if(abs(self.flow - self.capacity) <= FLOATING_POINT_EPSILON):
+            self.flow = self.capacity
 
         if(self.flow < 0):
             raise ValueError("flow is negative")
