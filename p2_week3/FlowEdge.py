@@ -1,7 +1,8 @@
 # For reference -> https://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
 
+FLOATING_POINT_EPSILON = 1e-10
 class FlowEdge:
-    FLOATING_POINT_EPSILON = 1e-10
+
     def __init__(self,*args):
         # Allow user to initalize edge in 2 ways
         # with v1, v2, capacity
