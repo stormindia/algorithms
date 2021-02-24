@@ -22,7 +22,7 @@ class TopologicalSort:
             if(self.marked[i] is not True):
 
                 self.dfs_for_topological_sort(self.G,i)
-
+        self.return_sorted_graph()
 
     def dfs_for_topological_sort(self,graph,vertex):
 
